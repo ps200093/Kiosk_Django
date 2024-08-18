@@ -14,5 +14,5 @@ Django를 사용하여 개발된 키오스크 시스템. 사용자는 제품을 
 1. **프로젝트 클론**
 
    ```bash
-   git clone https://github.com/yourusername/kiosk-system.git
+   git clone https://github.com/ps200093/Kiosk_Django.git
    cd kiosk-system
