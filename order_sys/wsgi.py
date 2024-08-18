@@ -1,5 +1,5 @@
 """
-WSGI config for starbucks_order project.
+WSGI config for order_sys project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'starbucks_order.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'order_sys.settings')
 
 application = get_wsgi_application()
