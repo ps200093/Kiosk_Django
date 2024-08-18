@@ -38,6 +38,9 @@ Django를 사용하여 개발된 키오스크 시스템. 사용자는 제품을 
    python manage.py runserver
 </br>
 
+8. **항목 추가**
+   
+   `localhost/admin`에서 품목 추가 
 ---
 </br>
 
