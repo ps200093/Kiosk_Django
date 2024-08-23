@@ -49,3 +49,9 @@ Django를 사용하여 개발된 키오스크 시스템. 사용자는 제품을 
 운영 환경에서 필요한 환경 변수는 다음과 같습니다:
 ```plaintext
 DJANGO_SECRET_KEY=your-secret-key
+
+---
+
+
+![image](https://github.com/user-attachments/assets/cf9b3bcd-7cf7-4c3b-add8-1c3710420f95)
+
