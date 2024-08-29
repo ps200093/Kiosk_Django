@@ -5,6 +5,51 @@ body {
     padding: 0;
 }
 
+.ad-container {
+    width: 50%; /* 가로 크기를 화면의 80%로 설정 */
+    height: 80vh; /* 세로 크기를 화면 높이의 70%로 설정 */
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; /* 중앙에 위치하도록 설정 */
+}
+
+.slider {
+    display: flex;
+    width: 300%;
+    transition: transform 1s ease;
+}
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.skip-button {
+    position: absolute;
+    width: 20vw;
+    height: 10vh;
+    bottom: 20px; /* 버튼을 컨테이너의 아래에서 20px 위로 위치 */
+    left: 50%; /* 가로 방향으로 가운데 정렬 */
+    transform: translateX(-50%); /* 정확히 가운데에 위치하게 조정 */
+    padding: 10px 20px;
+    background-color: #00704A;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.skip-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/* 메인 콘텐츠 컨테이너 */
 .container {
     width: 800px;
     margin: 0 auto;
@@ -20,11 +65,13 @@ header {
     padding: 10px;
     margin-bottom: 20px;
 }
+
 .logo {
     max-width: 90px !important;
     height: auto !important;
 }
-.title{
+
+.title {
     flex: 1;
     font-size: 52px;
     font-family: 'Roboto', sans-serif;
@@ -33,24 +80,46 @@ header {
     text-align: center;
 }
 
+/* Category buttons container styling */
 .category {
-    text-align: center;
-    font-weight: bold;
-    font-size: 16px;
-    background-color: #00704A;
-    color: white;
-    padding: 10px;
-    margin-bottom: 20px;
+    display: flex; /* Flexbox layout for horizontal alignment */
+    justify-content: center; /* Center buttons horizontally */
+    margin-bottom: 20px; /* Space below the category section */
 }
+
+/* Individual category button styling */
+.category-btn {
+    background-color: #00704A; /* Default background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Space inside the button */
+    margin: 0 10px; /* Space between buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Rounded corners */
+    font-family: 'Roboto', sans-serif; /* Font style */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect for category buttons */
+.category-btn:hover {
+    background-color: #005a37; /* Darker shade on hover */
+}
+
+/* Active button style (when a category is selected) */
+.category-btn.active {
+    background-color: #004a2c; /* Even darker shade when active */
+}
+
 
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .product-btn {
+    transition: all 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,6 +127,11 @@ header {
     border: 1px solid #ddd;
     padding: 10px;
     cursor: pointer;
+}
+
+.product-btn:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
 }
 
 .product-btn img {
@@ -103,68 +177,63 @@ header {
     text-align: center;
 }
 
-.order-content {
+.tg {
     width: 100%;
     border-collapse: collapse;
 }
 
-.tg{
-    width: 100%;
-}
-
-.tg .tg-vaob{
-    background-color:#00704a;
-    color:#ffffff;
+.tg .tg-vaob {
+    background-color: #00704a;
+    color: #ffffff;
     font-weight: bold;
     font-size: 20px;
-    text-align:center;
-    vertical-align:top;
+    text-align: center;
+    vertical-align: top;
 }
 
-.tg .tg-wk8r{
-    background-color:#ffffff;
-    border-color:#ffffff;
-    text-align:center;
-    vertical-align:top;
+.tg .tg-wk8r {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    text-align: center;
+    vertical-align: top;
     font-weight: bold;
     font-size: 16px;
 }
 
-.tg .tg-0pky{
-    border-color:inherit;
-    text-align:right;
+.tg .tg-0pky {
+    border-color: inherit;
+    text-align: right;
     font-weight: bold;
-    vertical-align:top;
+    vertical-align: top;
     font-size: 16px;
 }
 
-.tg .tg-0lax{
-    text-align:left;
-    vertical-align:top;
+.tg .tg-0lax {
+    text-align: left;
+    vertical-align: top;
     font-size: 16px;
 }
 
-.tg .tg-c1kk{
-    text-align:right;
-    vertical-align:top;
+.tg .tg-c1kk {
+    text-align: right;
+    vertical-align: top;
     font-size: 16px;
 }
 
-.tg  {
-    border-collapse:collapse;
-    border-spacing:0;
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-
-.tg td{
-    border-style:solid;
-    border-width:0px;
+.tg td {
+    border-style: solid;
+    border-width: 0px;
     font-family: 'Roboto', sans-serif;
-    font-size:14px;
-    overflow:hidden;
-  padding:10px 5px;
-  word-break:normal;
-  }
+    font-size: 14px;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+}
 
 .order-info {
     width: 35%;
@@ -191,8 +260,6 @@ header {
     border-radius: 5px;
     margin-bottom: 10px;
 }
-
-
 
 @media (max-width: 600px) {
     .title {

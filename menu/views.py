@@ -10,8 +10,17 @@ def index(request):
     if request.method == 'POST':
         return redirect('/')
 
-    items = Product.objects.all()   # 모든 제품 가져오기
-    return render(request, 'menu/index.html', {'items': items})
+    foods = Product.objects.filter(category = 'foods')
+    drinks = Product.objects.filter(category = 'drinks')
+    desserts = Product.objects.filter(category = 'desserts')
+    etc = Product.objects.filter(category = 'etc')
+
+    # items = Product.objects.all()   # 모든 제품 가져오기
+    return render(request, 'menu/index.html',
+                  {'foods': foods,
+                   'drinks': drinks,
+                   'desserts': desserts,
+                   'etc': etc})
 
 
 @csrf_exempt
@@ -25,7 +34,8 @@ def confirm_home(request):
 
         if confirm == 'yes':
             print("초기화 시작")
-            reset_order_items(request.user)  # 현재 사용자의 주문 항목 초기화
+            # reset_order_items(request.user)  # 현재 사용자의 주문 항목 초기화
+            reset_order_items(1)
             print("초기화 완료")
             return JsonResponse({'status': 'redirect', 'url': redirect('index').url})
         else:
@@ -46,7 +56,11 @@ def add_to_order(request):
         print(f"Responsed product_id = {product_id}")
         print(f"Product: {product}, User: {request.user}")
 
-        order, created = Order.objects.get_or_create(user=request.user, completed=False)
+        # user = request.user._wrapped if hasattr(request.user, '_wrapped') else request.user
+        user = 1
+        print(f"user = {user}")
+
+        order, created = Order.objects.get_or_create(user=user, completed=False)
         order_item, created = OrderItem.objects.get_or_create(order=order, product=product)
 
         if not created:
@@ -69,7 +83,7 @@ def get_order_content(request):
     # 주문 내용 JSON 형태로 반환
 
     try:
-        order = Order.objects.get(user=request.user, completed=False)
+        order = Order.objects.get(user=1, completed=False)
     except Order.DoesNotExist:
         return JsonResponse({'order_items': [], 'total_quantity': 0, 'total_price': 0})
 
