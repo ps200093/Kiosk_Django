@@ -57,5 +57,5 @@ DJANGO_SECRET_KEY=your-secret-key
 ---
 
 
-![image](https://github.com/user-attachments/assets/cf9b3bcd-7cf7-4c3b-add8-1c3710420f95)
+![image](https://github.com/user-attachments/assets/21187e92-794e-438b-a0b3-d4e306f1b884)
 
