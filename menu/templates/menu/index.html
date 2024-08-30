@@ -99,14 +99,31 @@
             <div class="order-info">
                 <div class="order-info-item">총 수량: <span id="total_quantity"></span></div>
                 <div class="order-info-item">총 금액: <span id="total_price"></span></div>
-                <button class="order-btn">주문 버튼</button>
+                <button class="order-btn" onclick="processPayment()">주문 버튼</button>
                 <button class="reset-btn" onclick="confirmHome()">초기화</button>
             </div>
         </div>
     </div>
-    <script>
-        const confirmHomeUrl = "{% url 'confirm_home' %}";
-    </script>
+        <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePaymentModal()">&times;</span>
+            <p>결제 금액: <span id="paymentAmount"></span>원</p>
+            <button onclick="confirmPayment()">확인</button>
+            <button onclick="cancelPayment()">취소</button>
+        </div>
+    </div>
+
+    <!-- 결제 완료 메시지 -->
+    <div id="paymentCompleteMessage" class="modal">
+        <div class="modal-content">
+            <p>결제가 완료되었습니다.</p>
+            <p>상품은 집으로 3-5일 내 배송될 예정입니다.</p>
+        </div>
+    </div>
+
+<script>
+    const confirmHomeUrl = "{% url 'confirm_home' %}";
+</script>
 
 <script>
     let currentIndex = 0;
@@ -156,6 +173,51 @@
     document.addEventListener('DOMContentLoaded', function(){
     document.querySelector('.container').style.display = 'none';
     });
+
+    // 결제 화면을 표시하는 함수
+    function processPayment() {
+        const totalAmount = document.getElementById('total_price').innerText; // 총 금액 가져오기
+        if(totalAmount > '0'){
+            document.getElementById('paymentAmount').innerText = totalAmount;
+            document.getElementById('paymentModal').style.display = 'block';
+        }
+    }
+
+    // 결제 확인 후 처리하는 함수
+    function confirmPayment() {
+        document.getElementById('paymentModal').style.display = 'none'; // 결제 화면 닫기
+        document.getElementById('paymentCompleteMessage').style.display = 'block'; // 결제 완료 메시지 표시
+        clearOrder(); // 주문 내역 초기화
+        setTimeout(() => {
+            document.getElementById('paymentCompleteMessage').style.display = 'none'; // 메시지 숨기기
+            showAdScreen(); // 광고 화면으로 이동
+<!--            goHome(); // 메인 화면으로 이동-->
+        }, 3000); // 3초 후 메인 화면으로 이동
+    }
+
+    // 결제 모달을 닫는 함수
+    function closePaymentModal() {
+        document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    // 결제 취소 시 처리하는 함수
+    function cancelPayment() {
+        closePaymentModal(); // 모달 닫기
+    }
+
+    // 주문 내역 초기화 함수
+    function clearOrder() {
+        document.querySelector('#order-list tbody').innerHTML = '';
+        document.getElementById('total_quantity').innerText = '0';
+        document.getElementById('total_price').innerText = '0';
+    }
+
+    // 광고 화면으로 돌아가는 함수
+    function showAdScreen() {
+        document.querySelector('.container').style.display = 'none';
+        document.querySelector('.ad-container').style.display = 'block';
+    }
+
 </script>
     <script src="{% static 'scripts.js' %}"></script>
 </body>

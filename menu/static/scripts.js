@@ -144,6 +144,7 @@ function setCategory(category) {
 }
 
 
+
 //    document.addEventListener('DOMContentLoaded', updateOrderContent);
 document.addEventListener('DOMContentLoaded', function() {
     updateOrderContentTable();
